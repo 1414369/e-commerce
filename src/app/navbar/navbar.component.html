@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" routerLink=''><i class="fas fa-car"></i></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink='/shopping-cart'>Shopping cart <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" routerLink='/shopping-cart'>Login</span></a>
+      </li>
+      <li ngbDropdown class="nav-item dropdown">
+        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Tuan Duong
+        </a>
+        <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a ngbDropdownItem class="dropdown-item" routerLink='/my/orders'>My orders</a>
+          <a ngbDropdownItem class="dropdown-item" routerLink='/admin/orders'>Manage Orders</a>
+          <a ngbDropdownItem class="dropdown-item" routerLink='/admin/products'>Manage Products</a>
+          <a ngbDropdownItem class="dropdown-item">Logout</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
