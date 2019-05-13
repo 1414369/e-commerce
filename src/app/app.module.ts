@@ -1,3 +1,4 @@
+import { MustMatchDirective } from './_helper/must-match.directive';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -17,9 +18,11 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
+    MustMatchDirective,
     AppComponent,
     NavbarComponent,
     HomeComponent,
@@ -36,6 +39,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     NgbModule.forRoot(),
   ],
   providers: [],
