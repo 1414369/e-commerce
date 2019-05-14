@@ -2,9 +2,8 @@
   <aside class="col-4 mx-auto">
     <div class="card">
       <article class="card-body">
-        <h4 class="card-title mb-4 mt-1">Sign Up</h4>
-        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"
-          [mustMatch]="['password', 'confirmPassword']" novalidate>
+        <h4 class="card-title mb-4 mt-1">Sign In</h4>
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
 
           <div class="form-group">
             <label>Your Email</label>
@@ -17,6 +16,7 @@
           </div> <!-- form-group// -->
 
           <div class="form-group">
+            <a class="float-right" href="#">Forgot your password?</a>
             <label>Your Password</label>
             <input name="password" [(ngModel)]="model.password" #password="ngModel" class="form-control"
               placeholder="******" type="password" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }"
@@ -28,18 +28,12 @@
           </div> <!-- form-group// -->
 
           <div class="form-group">
-            <label>Confirm Password</label>
-            <input name="confirmPassword" [(ngModel)]="model.confirmPassword" #confirmPassword="ngModel"
-              class="form-control" placeholder="******" type="password"
-              [ngClass]="{ 'is-invalid': f.submitted && confirmPassword.invalid }" required>
-            <div *ngIf="f.submitted && confirmPassword.invalid" class="invalid-feedback">
-              <div *ngIf="confirmPassword.errors.required">Confirm Password is required</div>
-              <div *ngIf="confirmPassword.errors.mustMatch">Passwords must match</div>
-            </div>
+            <div class="checkbox">
+              <label> <input type="checkbox"> Save password </label>
+            </div> <!-- checkbox .// -->
           </div> <!-- form-group// -->
-
           <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block"> Sign Up </button>
+            <button type="submit" class="btn btn-primary btn-block"> Sign In </button>
           </div> <!-- form-group// -->
         </form>
       </article>

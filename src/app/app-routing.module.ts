@@ -1,15 +1,15 @@
-import { SignInComponent } from './sign-in/sign-in.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
+import { SignInComponent } from './client/sign-in/sign-in.component';
+import { SignUpComponent } from './client/sign-up/sign-up.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
-import { CheckOutComponent } from './check-out/check-out.component';
-import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { HomeComponent } from './home/home.component';
+import { CheckOutComponent } from './client/check-out/check-out.component';
+import { MyOrdersComponent } from './client/my-orders/my-orders.component';
+import { HomeComponent } from './client/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProductsComponent } from './products/products.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-import { OrderSuccessComponent } from './order-success/order-success.component';
+import { ProductsComponent } from './client/products/products.component';
+import { ShoppingCartComponent } from './client/shopping-cart/shopping-cart.component';
+import { OrderSuccessComponent } from './client/order-success/order-success.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
