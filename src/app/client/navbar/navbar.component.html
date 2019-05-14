@@ -26,9 +26,9 @@
         </a>
         <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a ngbDropdownItem class="dropdown-item" routerLink='/my/orders'>My orders</a>
-          <a ngbDropdownItem class="dropdown-item" routerLink='/admin/orders' *ngIf="!currentUser.isAdmin">Manage
+          <a ngbDropdownItem class="dropdown-item" routerLink='/admin/orders' *ngIf="currentUser.isAdmin">Manage
             Orders</a>
-          <a ngbDropdownItem class="dropdown-item" routerLink='/admin/products' *ngIf="!currentUser.isAdmin">Manage
+          <a ngbDropdownItem class="dropdown-item" routerLink='/admin/products' *ngIf="currentUser.isAdmin">Manage
             Products</a>
           <a ngbDropdownItem class="dropdown-item" (click)="authenticationService.logout()">Logout</a>
         </div>

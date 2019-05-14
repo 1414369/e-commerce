@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -16,6 +17,7 @@ export class AuthenticationService {
   private helper = new JwtHelperService();
 
   constructor(
+    private router: Router,
     private http: HttpClient
   ) {
     this.currentUserSubject = new BehaviorSubject<User>(this.decodeToken());
@@ -43,6 +45,7 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     localStorage.removeItem(environment.tokenKey);
     this.currentUserSubject.next(null);
+    this.router.navigate(['/sign-in']);
   }
 
   private decodeToken(): User {

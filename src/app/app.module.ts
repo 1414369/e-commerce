@@ -21,6 +21,7 @@ import { SignInComponent } from './client/sign-in/sign-in.component';
 import { SignUpComponent } from './client/sign-up/sign-up.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NoPermissionComponent } from './no-permission/no-permission.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     AdminProductsComponent,
     AdminOrdersComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    NoPermissionComponent
   ],
   imports: [
     BrowserModule,
