@@ -11,7 +11,7 @@ import { ProductsComponent } from './client/products/products.component';
 import { ShoppingCartComponent } from './client/shopping-cart/shopping-cart.component';
 import { OrderSuccessComponent } from './client/order-success/order-success.component';
 import { NoPermissionComponent } from './client/no-permission/no-permission.component';
-import { AuthGuard, AdminGuard } from '@/_guards';
+import { AuthGuard, AdminGuard, LoggedInGuard } from '@/_guards';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,8 +20,8 @@ const routes: Routes = [
   { path: 'my/order-success', component: OrderSuccessComponent, canActivate: [AuthGuard] },
   { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
   { path: 'check-out', component: CheckOutComponent },
-  { path: 'sign-up', component: SignUpComponent },
-  { path: 'sign-in', component: SignInComponent },
+  { path: 'sign-up', component: SignUpComponent, canActivate: [LoggedInGuard] },
+  { path: 'sign-in', component: SignInComponent, canActivate: [LoggedInGuard] },
   { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'no-permission', component: NoPermissionComponent },
