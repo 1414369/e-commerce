@@ -10,8 +10,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProductsComponent } from './client/products/products.component';
 import { ShoppingCartComponent } from './client/shopping-cart/shopping-cart.component';
 import { OrderSuccessComponent } from './client/order-success/order-success.component';
-import { NoPermissionComponent } from './no-permission/no-permission.component';
-import { AuthGuard, AdminGuard } from './_guards';
+import { NoPermissionComponent } from './client/no-permission/no-permission.component';
+import { AuthGuard, AdminGuard } from '@/_guards';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },

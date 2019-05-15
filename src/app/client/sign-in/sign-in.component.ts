@@ -1,5 +1,5 @@
 import { first } from 'rxjs/operators';
-import { AuthenticationService, Credentials } from './../../_services/authentication.service';
+import { AuthenticationService, Credentials } from '@/_services';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 

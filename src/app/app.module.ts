@@ -1,5 +1,5 @@
-import { UserService } from './_services/user.service';
-import { MustMatchDirective } from './_helper/must-match.directive';
+import { UserService } from '@/_services';
+import { MustMatchDirective } from '@/_helper';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -21,7 +21,8 @@ import { SignInComponent } from './client/sign-in/sign-in.component';
 import { SignUpComponent } from './client/sign-up/sign-up.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NoPermissionComponent } from './no-permission/no-permission.component';
+import { NoPermissionComponent } from './client/no-permission/no-permission.component';
+import { AlertComponent } from '@/_components';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { NoPermissionComponent } from './no-permission/no-permission.component';
     AdminOrdersComponent,
     SignInComponent,
     SignUpComponent,
-    NoPermissionComponent
+    NoPermissionComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
