@@ -1,4 +1,4 @@
-import { UserService } from '@/_services';
+import { UserService, AlertService } from '@/_services';
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -13,6 +13,7 @@ export class SignUpComponent implements OnInit {
   loading: boolean = false;
 
   constructor(
+    private alertService: AlertService,
     private userService: UserService,
     private router: Router
   ) { }
@@ -21,17 +22,16 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit() {
-    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.model))
     this.loading = true;
     this.userService.register(this.model)
       .pipe(first())
       .subscribe(
         data => {
-          // this.alertService.success('Registration successful', true);
+          this.alertService.success('Registration successful', true);
           this.router.navigate(['/sign-in']);
         },
         error => {
-          // this.alertService.error(error);
+          this.alertService.error(error.error);
           this.loading = false;
         });
   }
