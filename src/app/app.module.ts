@@ -25,6 +25,7 @@ import { NoPermissionComponent } from './client/no-permission/no-permission.comp
 import { AlertComponent } from '@/_components';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { PickImageComponent } from './_components/pick-image/pick-image.component';
+import { ProductListComponent } from './_components/product-list/product-list.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { PickImageComponent } from './_components/pick-image/pick-image.componen
     NoPermissionComponent,
     AlertComponent,
     ProductFormComponent,
-    PickImageComponent
+    PickImageComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,

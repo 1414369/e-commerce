@@ -1,3 +1,4 @@
+import { Product } from '@/_models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
@@ -10,12 +11,15 @@ export class ProductService {
   constructor(private http: HttpClient) {
 
   }
-
-  getAll() {
-    return this.http.get<{ name: string }>(`${environment.apiUrl}/products`);
-  }
-
   create(data) {
-    return this.http.post(`${environment.apiUrl}/products`, data);
+    return this.http.post<Product>(`${environment.apiUrl}/products`, data);
   }
+  getAll() {
+    return this.http.get<Product[]>(`${environment.apiUrl}/products`);
+  }
+  get(id) {
+    return this.http.get<Product>(`${environment.apiUrl}/products/${id}`);
+  }
+
+
 }

@@ -1,3 +1,4 @@
+import { Product } from './../../_models/product';
 import { PickImageComponent } from '@/_components';
 import { Subscription, Observable } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -5,6 +6,8 @@ import { Product } from '@/_models';
 import { ProductCategoryService, ProductService } from '@/_services';
 import { NgbModal, ModalDismissReasons, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Router, ActivatedRoute } from '@angular/router';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-form',
@@ -12,19 +15,30 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   styleUrls: ['./product-form.component.scss']
 })
 export class ProductFormComponent implements OnInit {
-  model: Product;
+  product = {};
   productCategories$;
   imgURL: SafeResourceUrl;
   imgBlob: Blob;
 
   constructor(
+    private router: Router,
+    private route: ActivatedRoute,
     private ProductService: ProductService,
     private sanitization: DomSanitizer,
     private modalService: NgbModal,
-    private productCategory: ProductCategoryService) { }
+    private productCategory: ProductCategoryService) {
+
+    this.productCategories$ = this.productCategory.getAll()
+
+    let id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.ProductService.get(id).pipe(
+        take(1),
+      ).subscribe(p => this.product = p)
+    }
+  }
 
   ngOnInit() {
-    this.productCategories$ = this.productCategory.getAll()
   }
 
   onSave(product) {
@@ -45,7 +59,7 @@ export class ProductFormComponent implements OnInit {
       keyboard: true,
     }
     this.modalService.open(PickImageComponent, modalConfig).result.then(({ croppedImage, croppedImageBlob }) => {
-      this.imgURL = this.sanitization.bypassSecurityTrustResourceUrl(croppedImage);
+      this.product.imageUrl = <string>this.sanitization.bypassSecurityTrustResourceUrl(croppedImage);
       this.imgBlob = croppedImageBlob;
     });
   }

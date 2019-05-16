@@ -23,8 +23,9 @@ const routes: Routes = [
   { path: 'check-out', component: CheckOutComponent },
   { path: 'sign-up', component: SignUpComponent, canActivate: [LoggedInGuard] },
   { path: 'sign-in', component: SignInComponent, canActivate: [LoggedInGuard] },
-  { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuard, AdminGuard] },
+  { path: 'admin/products/:id', component: ProductFormComponent, canActivate: [AuthGuard, AdminGuard] },
+  { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'no-permission', component: NoPermissionComponent },
 
