@@ -1,7 +1,8 @@
-import { UserService, AlertService } from '@/_services';
+import { UserService } from '@/_services';
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,7 +14,7 @@ export class SignUpComponent implements OnInit {
   loading: boolean = false;
 
   constructor(
-    private alertService: AlertService,
+    private toastr: ToastrService,
     private userService: UserService,
     private router: Router
   ) { }
@@ -27,11 +28,11 @@ export class SignUpComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.alertService.success('Registration successful', true);
+          this.toastr.success('Registration successful');
           this.router.navigate(['/sign-in']);
         },
         error => {
-          this.alertService.error(error.error);
+          this.toastr.error(error.error);
           this.loading = false;
         });
   }

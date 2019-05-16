@@ -22,11 +22,12 @@ import { SignUpComponent } from './client/sign-up/sign-up.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NoPermissionComponent } from './client/no-permission/no-permission.component';
-import { AlertComponent } from '@/_components';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { PickImageComponent } from './_components/pick-image/pick-image.component';
 import { ProductListComponent } from './_components/product-list/product-list.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     MustMatchDirective,
@@ -43,10 +44,10 @@ import { ProductListComponent } from './_components/product-list/product-list.co
     SignInComponent,
     SignUpComponent,
     NoPermissionComponent,
-    AlertComponent,
     ProductFormComponent,
     PickImageComponent,
-    ProductListComponent
+    ProductListComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -55,6 +56,10 @@ import { ProductListComponent } from './_components/product-list/product-list.co
     FormsModule,
     ImageCropperModule,
     NgbModule.forRoot(),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+    })
   ],
   providers: [
     UserService,

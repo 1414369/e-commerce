@@ -1,4 +1,3 @@
-import { Product } from './../../_models/product';
 import { PickImageComponent } from '@/_components';
 import { Subscription, Observable } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -15,7 +14,7 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./product-form.component.scss']
 })
 export class ProductFormComponent implements OnInit {
-  product = {};
+  product = {} as Product;
   productCategories$;
   imgURL: SafeResourceUrl;
   imgBlob: Blob;
