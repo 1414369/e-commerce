@@ -3,7 +3,7 @@ import { MustMatchDirective } from '@/_helper';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +23,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NoPermissionComponent } from './client/no-permission/no-permission.component';
 import { AlertComponent } from '@/_components';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { PickImageComponent } from './_components/pick-image/pick-image.component';
 
 @NgModule({
   declarations: [
@@ -40,18 +42,24 @@ import { AlertComponent } from '@/_components';
     SignInComponent,
     SignUpComponent,
     NoPermissionComponent,
-    AlertComponent
+    AlertComponent,
+    ProductFormComponent,
+    PickImageComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
+    ImageCropperModule,
     NgbModule.forRoot(),
   ],
   providers: [
     UserService,
 
+  ],
+  entryComponents: [
+    PickImageComponent,
   ],
   bootstrap: [AppComponent]
 })

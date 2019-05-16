@@ -1,0 +1,31 @@
+<div class="modal-header">
+  <h4 class="modal-title">Select Image</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+  <div class="custom-file">
+    <input type="file" class="custom-file-input" id="validatedCustomFile" name="productImage"
+      (change)="fileChangeEvent($event)" [disabled]='isloading'>
+    <label class="custom-file-label"
+      for="validatedCustomFile">{{ selectedImage ? selectedImage.name : "Choose file..." }}</label>
+  </div>
+
+  <div class='cropper-container'>
+    <div class="spinner-border text-primary mx-auto" style="width: 3rem; height: 3rem;" role="status"
+      [hidden]='!isloading'>
+      <span class="sr-only">Loading...</span>
+    </div>
+
+    <image-cropper [imageChangedEvent]="selectedImageEvent" [cropperMinWidth]='350' outputType='both'
+      [maintainAspectRatio]="true" [aspectRatio]="1/1" [resizeToWidth]="350" format="jpg"
+      (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+      (loadImageFailed)="loadImageFailed()"></image-cropper>
+  </div>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close(result)">Save</button>
+</div>

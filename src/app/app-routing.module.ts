@@ -12,6 +12,7 @@ import { ShoppingCartComponent } from './client/shopping-cart/shopping-cart.comp
 import { OrderSuccessComponent } from './client/order-success/order-success.component';
 import { NoPermissionComponent } from './client/no-permission/no-permission.component';
 import { AuthGuard, AdminGuard, LoggedInGuard } from '@/_guards';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent, canActivate: [LoggedInGuard] },
   { path: 'sign-in', component: SignInComponent, canActivate: [LoggedInGuard] },
   { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard, AdminGuard] },
+  { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'no-permission', component: NoPermissionComponent },
 
