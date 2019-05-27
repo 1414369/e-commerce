@@ -20,6 +20,8 @@ export class ProductService {
   get(id) {
     return this.http.get<Product>(`${environment.apiUrl}/products/${id}`);
   }
-
+  update(data) {
+    return this.http.put<Product>(`${environment.apiUrl}/products`, data);
+  }
 
 }

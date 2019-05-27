@@ -1,7 +1,7 @@
 import { UserService } from '@/_services';
-import { MustMatchDirective } from '@/_helper';
+import { MustMatchDirective, GlobalErrorHandler, ServerErrorInterceptor } from '@/_helper';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ImageCropperModule } from 'ngx-image-cropper';
 
@@ -50,6 +50,9 @@ import { ToastrModule } from 'ngx-toastr';
 
   ],
   imports: [
+    ToastrModule.forRoot({
+      timeOut: 5000,
+    }),
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
@@ -57,13 +60,12 @@ import { ToastrModule } from 'ngx-toastr';
     ImageCropperModule,
     NgbModule.forRoot(),
     BrowserAnimationsModule,
-    ToastrModule.forRoot({
-      timeOut: 5000,
-    })
+
   ],
   providers: [
     UserService,
-
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
+    { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true }
   ],
   entryComponents: [
     PickImageComponent,

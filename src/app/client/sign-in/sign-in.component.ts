@@ -14,7 +14,6 @@ export class SignInComponent implements OnInit {
     email: '',
     password: '',
   };
-  loading: boolean = false;
 
   constructor(
     private toastr: ToastrService,
@@ -26,17 +25,12 @@ export class SignInComponent implements OnInit {
   }
 
   onSubmit() {
-    this.loading = true;
     this.authenticationService.login(this.model)
       .pipe(first())
       .subscribe(
         data => {
           this.toastr.success('Sign in successful');
           this.router.navigate(['']);
-        },
-        error => {
-          this.toastr.error(error.error);
-          this.loading = false;
         });
   }
 }
