@@ -5,6 +5,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ImageCropperModule } from 'ngx-image-cropper';
 
+import { DataTableModule } from 'angular7-data-table';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './client/navbar/navbar.component';
@@ -23,7 +24,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NoPermissionComponent } from './client/no-permission/no-permission.component';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
-import { ProductListComponent } from './_components/product-list/product-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
@@ -48,10 +48,10 @@ import { PickImageComponent, ConfirmModalComponent } from '@/_components';
     NoPermissionComponent,
     ProductFormComponent,
     PickImageComponent,
-    ProductListComponent,
     ConfirmModalComponent,
   ],
   imports: [
+    DataTableModule.forRoot(),  
     ToastrModule.forRoot({
       timeOut: 5000,
     }),
