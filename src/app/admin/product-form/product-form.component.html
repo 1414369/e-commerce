@@ -47,6 +47,7 @@
 
         <div class="form-group">
           <button type="submit" class="btn btn-primary"> Save </button>
+          <button type="button" (click)='delete()' class="btn btn-danger ml-1" *ngIf='id'> Delete </button>
         </div> <!-- form-group// -->
       </form>
     </article>

@@ -23,11 +23,13 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NoPermissionComponent } from './client/no-permission/no-permission.component';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
-import { PickImageComponent } from './_components/pick-image/pick-image.component';
 import { ProductListComponent } from './_components/product-list/product-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
+
+import { PickImageComponent, ConfirmModalComponent } from '@/_components';
+
 @NgModule({
   declarations: [
     MustMatchDirective,
@@ -47,7 +49,7 @@ import { ToastrModule } from 'ngx-toastr';
     ProductFormComponent,
     PickImageComponent,
     ProductListComponent,
-
+    ConfirmModalComponent,
   ],
   imports: [
     ToastrModule.forRoot({
@@ -69,6 +71,7 @@ import { ToastrModule } from 'ngx-toastr';
   ],
   entryComponents: [
     PickImageComponent,
+    ConfirmModalComponent,
   ],
   bootstrap: [AppComponent]
 })

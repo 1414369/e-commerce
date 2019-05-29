@@ -11,6 +11,7 @@ export class ProductService {
   constructor(private http: HttpClient) {
 
   }
+
   create(data) {
     return this.http.post<Product>(`${environment.apiUrl}/products`, data);
   }
@@ -20,8 +21,10 @@ export class ProductService {
   get(id) {
     return this.http.get<Product>(`${environment.apiUrl}/products/${id}`);
   }
-  update(data) {
-    return this.http.put<Product>(`${environment.apiUrl}/products`, data);
+  update(id, data) {
+    return this.http.put<Product>(`${environment.apiUrl}/products/${id}`, data);
   }
-
+  delete(id) {
+    return this.http.delete<Product>(`${environment.apiUrl}/products/${id}`);
+  }
 }
