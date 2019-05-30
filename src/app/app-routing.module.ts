@@ -15,7 +15,7 @@ import { AuthGuard, AdminGuard, LoggedInGuard } from '@/_guards';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: ProductsComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'shopping-cart', component: ShoppingCartComponent },
   { path: 'my/order-success', component: OrderSuccessComponent, canActivate: [AuthGuard] },

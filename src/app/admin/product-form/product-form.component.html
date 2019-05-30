@@ -54,18 +54,10 @@
   </aside>
 
   <aside class="col-6" [hidden]='!title.value'>
-    <div class="card mx-auto" id='product-preview'>
-      <div id='image-container'>
-        <div id='pick-img' (click)='openPickImageModal()'>
-          <i class="fas fa-camera"></i>
-        </div>
-        <img [src]="product.imageUrl || 'assets/img/noimage.png'" class="card-img-top" alt="meat">
-      </div>
-
-      <div class="card-body">
-        <h5 class="card-title">{{ title.value }}</h5>
-        <p class="card-text">Price: ${{ price.value }}</p>
-      </div>
+    <div class="mx-auto product-card-container">
+      <app-product-card  [product]='product' (cropped-image)='getCroppedImage($event)'
+        [show-actions]='false'>
+      </app-product-card>
     </div>
   </aside>
 </div>

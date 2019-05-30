@@ -1,0 +1,17 @@
+<div class="card mx-auto" id='product-preview'>
+  <div id='image-container'>
+    <div *ngIf='!showActions' id='pick-img' (click)='openPickImageModal()'>
+      <i class="fas fa-camera"></i>
+    </div>
+    <img [src]="product.imageUrl || 'assets/img/noimage.png'" class="card-img-top" alt="meat">
+  </div>
+
+  <div class="card-body">
+    <h5 class="card-title">{{ product.title }}</h5>
+    <p class="card-text">Price: {{ product.price | currency:'USD':'symbol' }}</p>
+  </div>
+
+  <div class="card-footer" *ngIf='showActions'>
+    <button class="btn btn-primary btn-block">Add to Cart</button>
+  </div>
+</div>

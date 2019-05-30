@@ -4,7 +4,7 @@ import { Subscription, Observable } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Product } from '@/_models';
 import { ProductCategoryService, ProductService } from '@/_services';
-import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
@@ -26,7 +26,6 @@ export class ProductFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private ProductService: ProductService,
-    private sanitization: DomSanitizer,
     private modalService: NgbModal,
     private productCategory: ProductCategoryService
   ) {
@@ -77,19 +76,7 @@ export class ProductFormComponent implements OnInit {
       // modal dismissed
     });
   }
-
-  openPickImageModal() {
-    const modalConfig: NgbModalConfig = {
-      backdrop: 'static',
-      keyboard: true,
-    }
-    this.modalService.open(PickImageComponent, modalConfig).result
-      .then(({ croppedImage, croppedImageBlob }) => {
-        this.product.imageUrl = <string>this.sanitization.bypassSecurityTrustResourceUrl(croppedImage);
-        this.imgBlob = croppedImageBlob;
-      })
-      .catch((error) => {
-        // Users did not chose image
-      });
+  getCroppedImage(croppedImage) {
+    this.imgBlob = croppedImage;
   }
 }

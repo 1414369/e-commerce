@@ -1,5 +1,5 @@
 import { DataTableResource } from 'angular7-data-table';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '@/_models';
 import { Subscription } from 'rxjs';
 import { ProductService } from '@/_services';
@@ -9,16 +9,14 @@ import { ProductService } from '@/_services';
   templateUrl: './admin-products.component.html',
   styleUrls: ['./admin-products.component.scss']
 })
-export class AdminProductsComponent implements OnInit, OnDestroy {
-
+export class AdminProductsComponent implements OnInit {
   products: Product[];
-  subscription: Subscription;
   tableResource: DataTableResource<Product>;
   items: Product[] = [];
   itemCount: number;
 
   constructor(private productService: ProductService) {
-    this.subscription = this.productService.getAll()
+    this.productService.getAll()
       .subscribe(products => {
         this.products = products;
         this.initializeTable(products);
@@ -46,10 +44,6 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
       this.products;
 
     this.initializeTable(filteredProducts);
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 
   ngOnInit() {

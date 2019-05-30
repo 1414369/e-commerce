@@ -1,32 +1,3 @@
-$pick-image-height: 50px;
-
-#product-preview {
-    width: 325px;
-
-    #image-container {
-        position: relative;
-    }
-
-    #pick-img {
-        cursor: pointer;
-        position: absolute;
-        background-color: rgba(0, 0, 0, .2);
-        color: #fff;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: $pick-image-height;
-
-        i {
-            font-size: 40px;
-            width: 100%;
-            line-height: $pick-image-height;
-            text-align: center;
-        }
-    }
-
-    #pick-img:hover {
-        background-color: rgba(0, 0, 0, .5);
-        color: #ccc;
-    }
+.product-card-container {
+  max-width: 325px;
 }
