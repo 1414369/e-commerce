@@ -1,12 +1,12 @@
 <div class="row">
   <div class="col-3">
     <app-product-filter [category]='category'></app-product-filter>
-</div>
+  </div>
   <div class="col">
     <div class="product-container">
       <ng-container *ngFor='let product of filteredProducts; let i = index'>
         <div class="product-card-container">
-          <app-product-card [product]='product'>
+          <app-product-card [product]='product' [shopping-cart]='shoppingCart'>
           </app-product-card>
         </div>
       </ng-container>
