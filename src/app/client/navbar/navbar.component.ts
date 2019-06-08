@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         x => this.currentUser = x
       );
 
-      this.totalItemsCount$ = this.cartService.totalCount
+      this.totalItemsCount$ = this.cartService.totalItemsCount
   }
 
   ngOnInit() {

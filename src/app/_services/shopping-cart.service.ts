@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
 export class ShoppingCartService {
   cartId: string;
   private totalCountSubject: BehaviorSubject<number>;
-  public totalCount: Observable<number>;
+  public totalItemsCount: Observable<number>;
 
   constructor(private http: HttpClient) {
     this.getOrCreateId().then(result => {
@@ -20,7 +20,7 @@ export class ShoppingCartService {
     });
 
     this.totalCountSubject = new BehaviorSubject<number>(0);
-    this.totalCount = this.totalCountSubject.asObservable();
+    this.totalItemsCount = this.totalCountSubject.asObservable();
   }
 
   getCart(): Observable<ShoppingCart> {
@@ -29,7 +29,7 @@ export class ShoppingCartService {
       .pipe(
         map((data) => {
           this.totalCountSubject.next(data.totalItemsCount);
-          return data;
+          return new ShoppingCart(data.products);
         })
       );
   }
@@ -38,7 +38,7 @@ export class ShoppingCartService {
     return this.http.post<ShoppingCartItem>(`${environment.apiUrl}/shopping-carts/${this.cartId}/items/${product._id}`, product)
       .pipe(
         map((data) => {
-          this.totalCountSubject.next(this.getTotalItemsCount() + 1);
+          this.totalCountSubject.next(this.getTotalItemsCount(data.quantity, true));
           return data;
         })
       );
@@ -48,14 +48,20 @@ export class ShoppingCartService {
     return this.http.put<ShoppingCartItem>(`${environment.apiUrl}/shopping-carts/${this.cartId}/items/${product._id}`, product)
       .pipe(
         map((data) => {
-          this.totalCountSubject.next(this.getTotalItemsCount() - 1);
+          this.totalCountSubject.next(this.getTotalItemsCount(data.quantity, false));
           return data;
         })
       );
   }
 
-  private getTotalItemsCount() {
-    return this.totalCountSubject.value;
+  private getTotalItemsCount(curQuantity: number, isAdd: boolean) {
+    if (isAdd) return this.totalCountSubject.value + 1;
+
+    if (curQuantity >= 0) {
+      return this.totalCountSubject.value - 1;
+    } else {
+      return this.totalCountSubject.value;
+    }
   }
   private create() {
     let data = {

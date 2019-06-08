@@ -32,6 +32,9 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 import { ProductsComponent } from './client/products/products.component';
 import { ProductFilterComponent } from './client/products/product-filter/product-filter.component';
 import { ProductCardComponent } from './_components/product-card/product-card.component';
+import { ProductQuantityComponent } from './_components/product-quantity/product-quantity.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,7 @@ import { ProductCardComponent } from './_components/product-card/product-card.co
     ConfirmModalComponent,
     ProductFilterComponent,
     ProductCardComponent,
+    ProductQuantityComponent,
   ],
   imports: [
     DataTableModule.forRoot(),
@@ -67,6 +71,7 @@ import { ProductCardComponent } from './_components/product-card/product-card.co
     ImageCropperModule,
     NgbModule.forRoot(),
     BrowserAnimationsModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
 
   ],
   providers: [

@@ -27,7 +27,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.products = products;
         return this.route.queryParamMap
       })
-    ).subscribe(params => {
+    ).subscribe(async params => {
       this.category = params.get('category');
       this.filteredProducts = (this.category) ?
         this.products.filter(product => {
@@ -36,20 +36,18 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.products;
 
       //Update cart every time change filter
-      this.updateCart();
+      await this.updateCart();
     })
   }
 
-  ngOnInit() {
-    this.updateCart();
+  async ngOnInit() {
+    await this.updateCart();
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
-  private updateCart() {
-    this.cartService.getCart().subscribe((x) => {
-      this.shoppingCart = x
-    });
+  private async updateCart() {
+    this.shoppingCart = await this.cartService.getCart().toPromise();
   }
 }
