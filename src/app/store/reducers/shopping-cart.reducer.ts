@@ -7,7 +7,7 @@ export const shoppingCartReducers = (
 ): iShoppingCartState => {
     switch (action.type) {
         case EShoppingCartActions.GetShoppingCartSuccess: {
-            let shoppingCart = action.payload;
+            const shoppingCart = action.payload;
 
             const entities = shoppingCart.items.reduce((entities, item) => {
                 return {
@@ -20,10 +20,37 @@ export const shoppingCartReducers = (
 
             return {
                 ...state,
-                items: shoppingCart.items,
                 entities,
             };
         }
+
+        case EShoppingCartActions.AddToCartSuccess: {
+            const product = action.payload;
+
+            const entities = { ...state.entities };
+            // if(!entities[product._id]){
+            //     entities[product._id] = product;
+            // }
+
+            // entities[product._id].quantity = product.quantity;
+
+            entities[product._id] = product;
+
+            return {
+                ...state,
+                entities,
+            };
+        }
+
+        // case EShoppingCartActions.RemoveFromCartSuccess: {
+        //     let shoppingCart = action.payload;
+
+        //     return {
+        //         ...state,
+        //         items: shoppingCart.items,
+        //         entities,
+        //     };
+        // }
 
         default:
             return state;

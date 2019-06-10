@@ -4,6 +4,10 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DomSanitizer } from '@angular/platform-browser';
 import { PickImageComponent } from '@/_components/pick-image/pick-image.component';
 
+import { Store } from '@ngrx/store';
+import { iAppState } from '@/store/state';
+import { AddToCart } from '@/store/actions/shopping-cart.action';
+
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
@@ -20,7 +24,12 @@ export class ProductCardComponent {
   constructor(
     private sanitization: DomSanitizer,
     private modalService: NgbModal,
+    private store: Store<iAppState>,
   ) { }
+
+  addToCart() {
+    this.store.dispatch(new AddToCart(this.product));
+  }
 
   openPickImageModal() {
     const modalConfig: NgbModalConfig = {

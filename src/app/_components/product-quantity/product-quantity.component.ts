@@ -1,6 +1,9 @@
 import { ShoppingCart, Product } from '@/_models';
-import { Component, Input, SimpleChanges, SimpleChange, OnInit } from '@angular/core';
-import { ShoppingCartService } from '@/_services';
+import { Component, Input } from '@angular/core';
+
+import { Store } from '@ngrx/store';
+import { iAppState } from '@/store/state';
+import { AddToCart, RemoveFromCart } from '@/store/actions/shopping-cart.action';
 
 @Component({
   selector: 'app-product-quantity',
@@ -12,16 +15,15 @@ export class ProductQuantityComponent {
   @Input('shopping-cart') shoppingCart: ShoppingCart;
 
   constructor(
-    private cartService: ShoppingCartService,
+    private store: Store<iAppState>,
   ) { }
 
   addToCart() {
-    this.cartService.add(this.product).subscribe(result => {
-    });
+    this.store.dispatch(new AddToCart(this.product));
   }
 
   removeFromCart() {
-    this.cartService.remove(this.product).subscribe(result => {
-    });
+    this.store.dispatch(new RemoveFromCart(this.product));
   }
+
 }

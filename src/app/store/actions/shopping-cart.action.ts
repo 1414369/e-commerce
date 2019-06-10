@@ -1,15 +1,21 @@
-import { ShoppingCartHttp } from '@/_models/http-models';
+import { ShoppingCartHttp, ShoppingCartItemHttp } from '@/_models/http-models';
 
 import { Action } from '@ngrx/store';
+import { Product } from '@/_models';
 
 export enum EShoppingCartActions {
     GetShoppingCart = '[ShoppingCart] Get ShoppingCart',
     GetShoppingCartSuccess = '[ShoppingCart] Get ShoppingCart Success',
+    AddToCart = '[ShoppingCart] Add ShoppingCart',
+    AddToCartSuccess = '[ShoppingCart] Add ShoppingCart Success',
+    RemoveFromCart = '[ShoppingCart] Remove ShoppingCart',
+    RemoveFromCartSuccess = '[ShoppingCart] Remove ShoppingCart Success',
 }
 
 export class GetShoppingCart implements Action {
     public readonly type = EShoppingCartActions.GetShoppingCart;
 }
+
 
 export class GetShoppingCartSucess implements Action {
     public readonly type = EShoppingCartActions.GetShoppingCartSuccess;
@@ -19,4 +25,30 @@ export class GetShoppingCartSucess implements Action {
     }
 }
 
-export type ShoppingCartActions = GetShoppingCart | GetShoppingCartSucess;
+export class AddToCart implements Action {
+    public readonly type = EShoppingCartActions.AddToCart;
+    constructor(public payload: Product) { }
+}
+
+export class AddToCartSuccess implements Action {
+    public readonly type = EShoppingCartActions.AddToCartSuccess;
+    constructor(
+        public payload: ShoppingCartItemHttp
+    ) {
+    }
+}
+
+export class RemoveFromCart implements Action {
+    public readonly type = EShoppingCartActions.RemoveFromCart;
+    constructor(public payload: Product) { }
+}
+
+export class RemoveFromCartSuccess implements Action {
+    public readonly type = EShoppingCartActions.RemoveFromCartSuccess;
+    constructor(
+        public payload: ShoppingCartItemHttp
+    ) {
+    }
+}
+
+export type ShoppingCartActions = GetShoppingCart | GetShoppingCartSucess | AddToCart | AddToCartSuccess | RemoveFromCart | RemoveFromCartSuccess;
