@@ -8,9 +8,9 @@ export class ShoppingCart {
     public items: ShoppingCartItem[] = [];
 
     constructor(public products, ) {
-        products.forEach(p => {
-            this.items.push(new ShoppingCartItem(p));
-        })
+        // products.forEach(p => {
+        //     this.items.push(new ShoppingCartItem(p));
+        // })
     }
 
     getQuantity(product: Product) {
@@ -23,9 +23,9 @@ export class ShoppingCart {
         return foundProduct.quantity;
     }
 
-    get totalPrice() {
-        return this.items.reduce((total, curItem) => {
-            return total + curItem.totalPrice;
-        }, 0)
-    }
+    // get totalPrice() {
+    //     return this.items.reduce((total, curItem) => {
+    //         return total + curItem.totalPrice;
+    //     }, 0)
+    // }
 }

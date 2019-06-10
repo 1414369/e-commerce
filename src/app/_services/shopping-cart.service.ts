@@ -23,15 +23,20 @@ export class ShoppingCartService {
     this.totalItemsCount = this.totalCountSubject.asObservable();
   }
 
+  // getCart(): Observable<ShoppingCart> {
+  //   if (!this.cartId) return new Observable();
+  //   return this.http.get<ShoppingCart>(`${environment.apiUrl}/shopping-carts/${this.cartId}`)
+  //     .pipe(
+  //       map((data) => {
+  //         this.totalCountSubject.next(data.totalItemsCount);
+  //         return new ShoppingCart(data.products);
+  //       })
+  //     );
+  // }
+
   getCart(): Observable<ShoppingCart> {
     if (!this.cartId) return new Observable();
     return this.http.get<ShoppingCart>(`${environment.apiUrl}/shopping-carts/${this.cartId}`)
-      .pipe(
-        map((data) => {
-          this.totalCountSubject.next(data.totalItemsCount);
-          return new ShoppingCart(data.products);
-        })
-      );
   }
 
   add(product: Product) {

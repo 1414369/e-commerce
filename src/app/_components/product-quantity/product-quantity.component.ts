@@ -1,5 +1,5 @@
 import { ShoppingCart, Product } from '@/_models';
-import { Component, Input, SimpleChanges, SimpleChange } from '@angular/core';
+import { Component, Input, SimpleChanges, SimpleChange, OnInit } from '@angular/core';
 import { ShoppingCartService } from '@/_services';
 
 @Component({
@@ -7,7 +7,7 @@ import { ShoppingCartService } from '@/_services';
   templateUrl: './product-quantity.component.html',
   styleUrls: ['./product-quantity.component.scss']
 })
-export class ProductQuantityComponent {
+export class ProductQuantityComponent implements OnInit {
 
   @Input('product') product: Product;
   @Input('shopping-cart') shoppingCart: ShoppingCart;
@@ -18,22 +18,19 @@ export class ProductQuantityComponent {
     private cartService: ShoppingCartService,
   ) { }
 
-  ngOnChanges(changes: SimpleChanges) {
-    const shoppingCart: SimpleChange = changes.shoppingCart;
-    if (shoppingCart.currentValue) {
-      this.quantity = this.getQuantity();
-    }
+  ngOnInit(){
+    
   }
 
   addToCart() {
     this.cartService.add(this.product).subscribe(result => {
-      this.quantity = result.quantity;
+      // this.quantity = result.quantity;
     });
   }
 
   removeFromCart() {
     this.cartService.remove(this.product).subscribe(result => {
-      this.quantity = result.quantity;
+      // this.quantity = result.quantity;
     });
   }
 

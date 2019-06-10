@@ -6,7 +6,7 @@
     <div class="product-container">
       <ng-container *ngFor='let product of filteredProducts; let i = index'>
         <div class="product-card-container">
-          <app-product-card [product]='product' [shopping-cart]='shoppingCart'>
+          <app-product-card [product]='product' [shopping-cart]='shoppingCart$ | async'>
           </app-product-card>
         </div>
       </ng-container>

@@ -34,7 +34,9 @@ import { ProductFilterComponent } from './client/products/product-filter/product
 import { ProductCardComponent } from './_components/product-card/product-card.component';
 import { ProductQuantityComponent } from './_components/product-quantity/product-quantity.component';
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
+import { reducers, metaReducers } from './store/reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { ShoppingCartEffects } from './store/effects';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,7 @@ import { reducers, metaReducers } from './reducers';
     NgbModule.forRoot(),
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([ShoppingCartEffects]),
 
   ],
   providers: [

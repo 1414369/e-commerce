@@ -5,23 +5,29 @@ import { Product, ShoppingCart } from '@/_models';
 import { switchMap, take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
+import { Store, select } from '@ngrx/store';
+import { sShoppingCartItems } from '@/store/selectors/shopping-cart.selector';
+import { iAppState } from '@/store/state';
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit, OnDestroy {
+export class ProductsComponent implements OnDestroy {
   products: Product[] = [];
   filteredProducts: Product[] = [];
   category: string;
   subscription: Subscription;
-  shoppingCart: ShoppingCart;
+  shoppingCart$ = this.store.pipe(select(sShoppingCartItems));
 
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private cartService: ShoppingCartService
+    private cartService: ShoppingCartService,
+    private store: Store<iAppState>,
   ) {
+
     this.subscription = this.productService.getAll().pipe(
       switchMap(products => {
         this.products = products;
@@ -34,20 +40,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
           return product.category == this.category;
         }) :
         this.products;
-
-      //Update cart every time change filter
-      await this.updateCart();
     })
   }
 
-  async ngOnInit() {
-    await this.updateCart();
-  }
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
-  private async updateCart() {
-    this.shoppingCart = await this.cartService.getCart().toPromise();
-  }
 }
