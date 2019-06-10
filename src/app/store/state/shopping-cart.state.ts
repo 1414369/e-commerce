@@ -1,13 +1,11 @@
-import { ShoppingCartItem } from '@/_models';
+import { ShoppingCartItemHttp } from '@/_models/http-models';
 
 export interface iShoppingCartState {
-    _id: string;
-    createdDate: Date;
-    items: Array<ShoppingCartItem>
+    items: Array<ShoppingCartItemHttp>
+    entities: { [id: string]: ShoppingCartItemHttp }
 }
 
 export const initialShoppingCartState: iShoppingCartState = {
-    _id: "",
-    createdDate: new Date(),
     items: [],
+    entities: {},
 };

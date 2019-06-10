@@ -7,12 +7,21 @@ export const shoppingCartReducers = (
 ): iShoppingCartState => {
     switch (action.type) {
         case EShoppingCartActions.GetShoppingCartSuccess: {
-            let payload = action.payload;
+            let shoppingCart = action.payload;
+
+            const entities = shoppingCart.items.reduce((entities, item) => {
+                return {
+                    ...entities,
+                    [item._id]: item,
+                };
+            }, {
+                    ...state.entities
+                });
+
             return {
                 ...state,
-                _id: payload._id,
-                createdDate: payload.createdDate,
-                items: payload.products,
+                items: shoppingCart.items,
+                entities,
             };
         }
 

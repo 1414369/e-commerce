@@ -1,4 +1,4 @@
-import { ShoppingCart } from '@/_models';
+import { ShoppingCartHttp } from '@/_models/http-models';
 
 import { Action } from '@ngrx/store';
 
@@ -14,7 +14,7 @@ export class GetShoppingCart implements Action {
 export class GetShoppingCartSucess implements Action {
     public readonly type = EShoppingCartActions.GetShoppingCartSuccess;
     constructor(
-        public payload: ShoppingCart
+        public payload: ShoppingCartHttp
     ) {
     }
 }

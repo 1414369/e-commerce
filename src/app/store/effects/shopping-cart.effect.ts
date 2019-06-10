@@ -9,7 +9,7 @@ import {
     EShoppingCartActions,
 } from '../actions/shopping-cart.action';
 import { ShoppingCartService } from '@/_services';
-import { ShoppingCart } from '@/_models';
+import { ShoppingCartHttp } from '@/_models/http-models';
 
 @Injectable()
 export class ShoppingCartEffects {
@@ -17,8 +17,8 @@ export class ShoppingCartEffects {
     getUsers$ = this.actions$.pipe(
         ofType<GetShoppingCart>(EShoppingCartActions.GetShoppingCart),
         switchMap(() => this.shoppingCartService.getCart()),
-        switchMap((result: ShoppingCart) =>
-         of(new GetShoppingCartSucess(result)))
+        switchMap((result: ShoppingCartHttp) =>
+            of(new GetShoppingCartSucess(result)))
     );
 
     constructor(

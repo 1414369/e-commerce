@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 import { environment } from 'environments/environment';
-import { ShoppingCart, ShoppingCartItem, Product } from '@/_models';
+import { Product } from '@/_models';
+import { ShoppingCartHttp, ShoppingCartItemHttp } from '@/_models/http-models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
@@ -23,24 +24,13 @@ export class ShoppingCartService {
     this.totalItemsCount = this.totalCountSubject.asObservable();
   }
 
-  // getCart(): Observable<ShoppingCart> {
-  //   if (!this.cartId) return new Observable();
-  //   return this.http.get<ShoppingCart>(`${environment.apiUrl}/shopping-carts/${this.cartId}`)
-  //     .pipe(
-  //       map((data) => {
-  //         this.totalCountSubject.next(data.totalItemsCount);
-  //         return new ShoppingCart(data.products);
-  //       })
-  //     );
-  // }
-
-  getCart(): Observable<ShoppingCart> {
+  getCart(): Observable<ShoppingCartHttp> {
     if (!this.cartId) return new Observable();
-    return this.http.get<ShoppingCart>(`${environment.apiUrl}/shopping-carts/${this.cartId}`)
+    return this.http.get<ShoppingCartHttp>(`${environment.apiUrl}/shopping-carts/${this.cartId}`)
   }
 
   add(product: Product) {
-    return this.http.post<ShoppingCartItem>(`${environment.apiUrl}/shopping-carts/${this.cartId}/items/${product._id}`, product)
+    return this.http.post<ShoppingCartItemHttp>(`${environment.apiUrl}/shopping-carts/${this.cartId}/items/${product._id}`, product)
       .pipe(
         map((data) => {
           this.totalCountSubject.next(this.getTotalItemsCount(data.quantity, true));
@@ -50,7 +40,7 @@ export class ShoppingCartService {
   }
 
   remove(product: Product) {
-    return this.http.put<ShoppingCartItem>(`${environment.apiUrl}/shopping-carts/${this.cartId}/items/${product._id}`, product)
+    return this.http.put<ShoppingCartItemHttp>(`${environment.apiUrl}/shopping-carts/${this.cartId}/items/${product._id}`, product)
       .pipe(
         map((data) => {
           this.totalCountSubject.next(this.getTotalItemsCount(data.quantity, false));
@@ -72,7 +62,7 @@ export class ShoppingCartService {
     let data = {
       createdDate: new Date().getTime(),
     }
-    return this.http.post<ShoppingCart>(`${environment.apiUrl}/shopping-carts`, data).toPromise();
+    return this.http.post<ShoppingCartHttp>(`${environment.apiUrl}/shopping-carts`, data).toPromise();
   }
 
   private async getOrCreateId() {

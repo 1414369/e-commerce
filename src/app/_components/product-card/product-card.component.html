@@ -12,7 +12,8 @@
   </div>
 
   <div class="card-footer" *ngIf='showActions'>
-    <button *ngIf='!(quantity); else updateQuantity' class="btn btn-primary btn-block" (click)='addToCart()'>Add
+    <button *ngIf='!shoppingCart.getQuantity(product); else updateQuantity' class="btn btn-primary btn-block"
+      (click)='addToCart()'>Add
       to Cart</button>
   </div>
 

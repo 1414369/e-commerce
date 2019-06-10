@@ -3,7 +3,7 @@
     <button class="btn btn-primary btn-block" (click)='removeFromCart()'>-</button>
   </div>
   <div class="col text-center">
-    {{ quantity }} in cart
+    {{ shoppingCart.getQuantity(product) }} in cart
   </div>
   <div class="col-2">
     <button class="btn btn-primary btn-block" (click)='addToCart()'>+</button>

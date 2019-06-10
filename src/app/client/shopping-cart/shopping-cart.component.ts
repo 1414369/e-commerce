@@ -1,7 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ShoppingCartService } from '@/_services';
-import { ShoppingCart } from '@/_models';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-shopping-cart',

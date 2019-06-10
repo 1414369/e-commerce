@@ -6,7 +6,7 @@ import { switchMap, take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 import { Store, select } from '@ngrx/store';
-import { sShoppingCartItems } from '@/store/selectors/shopping-cart.selector';
+import { sShoppingCartItems, sShoppingCart } from '@/store/selectors/shopping-cart.selector';
 import { iAppState } from '@/store/state';
 
 @Component({
@@ -19,7 +19,7 @@ export class ProductsComponent implements OnDestroy {
   filteredProducts: Product[] = [];
   category: string;
   subscription: Subscription;
-  shoppingCart$ = this.store.pipe(select(sShoppingCartItems));
+  shoppingCart$ = this.store.pipe(select(sShoppingCart));
 
   constructor(
     private route: ActivatedRoute,
