@@ -2,11 +2,11 @@
   <div class="col-3">
     <app-product-filter [category]='category'></app-product-filter>
   </div>
-  <div class="col">
+  <div class="col" *ngIf="shoppingCart$ | async as shoppingCart">
     <div class="product-container">
       <ng-container *ngFor='let product of filteredProducts; let i = index'>
         <div class="product-card-container">
-          <app-product-card [product]='product' [shopping-cart]='shoppingCart$ | async'>
+          <app-product-card [product]='product' [shopping-cart]='shoppingCart'>
           </app-product-card>
         </div>
       </ng-container>

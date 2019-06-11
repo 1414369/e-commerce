@@ -10,6 +10,8 @@ import {
     AddToCart,
     AddToCartSuccess,
     RemoveFromCart,
+    RemoveFromCartSuccess,
+    ClearCartSuccess
 } from '../actions/shopping-cart.action';
 import { ShoppingCartService } from '@/_services';
 import { ShoppingCartHttp, ShoppingCartItemHttp } from '@/_models/http-models';
@@ -39,7 +41,15 @@ export class ShoppingCartEffects {
         map(action => action.payload),
         switchMap((product) => this.shoppingCartService.remove(product)),
         switchMap((result: ShoppingCartItemHttp) =>
-            of(new AddToCartSuccess(result)))
+            of(new RemoveFromCartSuccess(result)))
+    );
+
+    @Effect()
+    clearCart$ = this.actions$.pipe(
+        ofType<ClearCartSuccess>(EShoppingCartActions.ClearCart),
+        switchMap(() => this.shoppingCartService.clearCart()),
+        switchMap((result: ShoppingCartHttp) =>
+            of(new ClearCartSuccess()))
     );
 
     constructor(

@@ -1,26 +1,29 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ShoppingCartService } from '@/_services';
+
+import { iAppState } from '@/store/state';
+import { sShoppingCart } from '@/store/selectors/shopping-cart.selector';
+import { GetShoppingCart, ClearCart } from '@/store/actions/shopping-cart.action';
+import { Store, select } from '@ngrx/store';
 
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.scss']
 })
-export class ShoppingCartComponent implements OnInit, OnDestroy {
-  totalItemsCount$;
-  cart$;
+export class ShoppingCartComponent implements OnInit {
+  cart$ = this.store.pipe(select(sShoppingCart));
 
   constructor(
-    private cartService: ShoppingCartService,
+    private store: Store<iAppState>
   ) {
-    this.totalItemsCount$ = this.cartService.totalItemsCount;
-    this.cart$ = this.cartService.getCart();
   }
 
   ngOnInit() {
+    this.store.dispatch(new GetShoppingCart());
   }
 
-  ngOnDestroy() {
+  clearCart() {
+    this.store.dispatch(new ClearCart());
   }
 
 }

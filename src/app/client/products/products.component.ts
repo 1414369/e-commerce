@@ -1,8 +1,8 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ProductService, ShoppingCartService } from '@/_services';
-import { Product, ShoppingCart } from '@/_models';
-import { switchMap, take } from 'rxjs/operators';
+import { ProductService } from '@/_services';
+import { Product } from '@/_models';
+import { switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 import { Store, select } from '@ngrx/store';
@@ -14,7 +14,7 @@ import { iAppState } from '@/store/state';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnDestroy {
+export class ProductsComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   filteredProducts: Product[] = [];
   category: string;
@@ -24,9 +24,18 @@ export class ProductsComponent implements OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private cartService: ShoppingCartService,
     private store: Store<iAppState>,
-  ) {
+  ) { }
+
+  ngOnInit() {
+    this.populateProducts();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  private populateProducts() {
     this.subscription = this.productService.getAll().pipe(
       switchMap(products => {
         this.products = products;
@@ -34,16 +43,13 @@ export class ProductsComponent implements OnDestroy {
       })
     ).subscribe(async params => {
       this.category = params.get('category');
-      this.filteredProducts = (this.category) ?
-        this.products.filter(product => {
-          return product.category == this.category;
-        }) :
-        this.products;
+      this.applyFillter();
     })
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  private applyFillter() {
+    this.filteredProducts = (this.category) ?
+      this.products.filter(p => { return p.category == this.category; }) :
+      this.products;
   }
-
 }

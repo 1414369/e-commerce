@@ -10,6 +10,9 @@ export enum EShoppingCartActions {
     AddToCartSuccess = '[ShoppingCart] Add ShoppingCart Success',
     RemoveFromCart = '[ShoppingCart] Remove ShoppingCart',
     RemoveFromCartSuccess = '[ShoppingCart] Remove ShoppingCart Success',
+    ClearCart = '[ShoppingCart] Clear ShoppingCart',
+    ClearCartSuccess = '[ShoppingCart] Clear ShoppingCart Success',
+
 }
 
 export class GetShoppingCart implements Action {
@@ -51,4 +54,20 @@ export class RemoveFromCartSuccess implements Action {
     }
 }
 
-export type ShoppingCartActions = GetShoppingCart | GetShoppingCartSucess | AddToCart | AddToCartSuccess | RemoveFromCart | RemoveFromCartSuccess;
+export class ClearCart implements Action {
+    public readonly type = EShoppingCartActions.ClearCart;
+}
+
+export class ClearCartSuccess implements Action {
+    public readonly type = EShoppingCartActions.ClearCartSuccess;
+}
+
+export type ShoppingCartActions =
+    GetShoppingCart |
+    GetShoppingCartSucess |
+    AddToCart |
+    AddToCartSuccess |
+    RemoveFromCart |
+    RemoveFromCartSuccess |
+    ClearCart |
+    ClearCartSuccess;

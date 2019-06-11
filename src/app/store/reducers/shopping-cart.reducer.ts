@@ -28,11 +28,6 @@ export const shoppingCartReducers = (
             const product = action.payload;
 
             const entities = { ...state.entities };
-            // if(!entities[product._id]){
-            //     entities[product._id] = product;
-            // }
-
-            // entities[product._id].quantity = product.quantity;
 
             entities[product._id] = product;
 
@@ -42,15 +37,32 @@ export const shoppingCartReducers = (
             };
         }
 
-        // case EShoppingCartActions.RemoveFromCartSuccess: {
-        //     let shoppingCart = action.payload;
+        case EShoppingCartActions.RemoveFromCartSuccess: {
+            const product = action.payload;
 
-        //     return {
-        //         ...state,
-        //         items: shoppingCart.items,
-        //         entities,
-        //     };
-        // }
+            let entities = { ...state.entities };
+
+            if (product.quantity > 0) {
+                entities[product._id] = product;
+            } else {
+                let { [product._id]: any, ...newEntities } = entities;
+                entities = { ...newEntities };
+            }
+
+            return {
+                ...state,
+                entities,
+            };
+        }
+
+        case EShoppingCartActions.ClearCartSuccess: {
+            let entities = {};
+
+            return {
+                ...state,
+                entities,
+            };
+        }
 
         default:
             return state;

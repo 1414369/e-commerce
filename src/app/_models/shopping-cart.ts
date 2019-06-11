@@ -5,7 +5,7 @@ import { ShoppingCartItemHttp } from './http-models';
 export class ShoppingCart {
     items: ShoppingCartItem[] = [];
 
-    constructor(public itemsMap: { [id: string]: ShoppingCartItemHttp }, ) {
+    constructor(private itemsMap: { [id: string]: ShoppingCartItemHttp }, ) {
         for (let itemId in itemsMap) {
             let item = itemsMap[itemId];
             this.items.push(new ShoppingCartItem(item.product, item.quantity));
@@ -28,9 +28,9 @@ export class ShoppingCart {
         return item.quantity;
     }
 
-    // get totalPrice() {
-    //     return this.items.reduce((total, curItem) => {
-    //         return total + curItem.totalPrice;
-    //     }, 0)
-    // }
+    get totalPrice() {
+        return this.items.reduce((total, curItem) => {
+            return total + curItem.totalPrice;
+        }, 0)
+    }
 }
