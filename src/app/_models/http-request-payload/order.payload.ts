@@ -1,8 +1,8 @@
-import { shippingHttp } from './http-models';
+import { shippingHttp } from '../http-models';
 
-import { ShoppingCartItem } from './shopping-cart-item';
+import { ShoppingCartItem } from '../shopping-cart-item';
 
-export class Order {
+export class OrderPayload {
     public items;
 
     constructor(

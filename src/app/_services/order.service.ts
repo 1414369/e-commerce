@@ -2,7 +2,7 @@ import { OrderHttp } from '@/_models/http-models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
-import { Order } from '@/_models';
+import { OrderPayload } from '@/_models/http-request-payload';
 
 import { Store } from '@ngrx/store';
 import { iAppState } from '@/store/state';
@@ -21,7 +21,7 @@ export class OrderService {
 
   }
 
-  create(data: Order) {
+  create(data: OrderPayload) {
     return this.http.post<OrderHttp>(`${environment.apiUrl}/orders`, data).pipe(
       tap(() => {
         this.store.dispatch(new ClearCart());

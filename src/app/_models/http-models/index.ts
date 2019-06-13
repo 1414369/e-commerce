@@ -1,3 +1,3 @@
-export * from './shopping-cart'
-export * from './shopping-cart-item'
-export * from './order'
+export * from './shopping-cart.http'
+export * from './shopping-cart-item.http'
+export * from './order.http'

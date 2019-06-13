@@ -1,4 +1,4 @@
-import { ShoppingCartItemHttp } from './shopping-cart-item';
+import { ShoppingCartItemHttp } from './shopping-cart-item.http';
 
 export interface ShoppingCartHttp {
     _id: string;

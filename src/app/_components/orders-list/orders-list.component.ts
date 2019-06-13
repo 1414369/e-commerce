@@ -1,6 +1,6 @@
 import { DataTableResource } from 'angular7-data-table';
 import { Component, OnInit } from '@angular/core';
-import { Order } from '@/_models';
+import { OrderPayload } from '@/_models/http-request-payload';
 import { OrderService } from '@/_services';
 
 @Component({
@@ -9,9 +9,9 @@ import { OrderService } from '@/_services';
   styleUrls: ['./orders-list.component.scss']
 })
 export class OrdersListComponent implements OnInit {
-  orders: Order[] = [];
-  tableResource: DataTableResource<Order>;
-  items: Order[] = [];
+  orders: OrderPayload[] = [];
+  tableResource: DataTableResource<OrderPayload>;
+  items: OrderPayload[] = [];
   itemCount: number;
 
   constructor(private orderService: OrderService) {
@@ -27,7 +27,7 @@ export class OrdersListComponent implements OnInit {
       });
   }
 
-  private initializeTable(orders: Order[]) {
+  private initializeTable(orders: OrderPayload[]) {
     this.tableResource = new DataTableResource(orders);
     this.tableResource.query({ offset: 0 })
       .then(items => this.items = items);

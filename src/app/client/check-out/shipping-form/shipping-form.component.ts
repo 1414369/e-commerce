@@ -1,4 +1,4 @@
-import { Order } from '@/_models';
+import { OrderPayload } from '@/_models/http-request-payload';
 import { Component, OnInit, Input } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { OrderService, AuthenticationService } from '@/_services';
@@ -37,7 +37,7 @@ export class ShippingFormComponent implements OnInit {
   }
 
   placeOrder() {
-    let order = new Order(this.userId, this.shoppingCart.items, this.shipping);
+    let order = new OrderPayload(this.userId, this.shoppingCart.items, this.shipping);
     this.orderService.create(order).subscribe(result => {
       this.toastr.success('Place order successfully.')
       this.router.navigate(['/']);
