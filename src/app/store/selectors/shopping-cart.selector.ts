@@ -8,7 +8,7 @@ const selectShoppingCart = (state: iAppState) => state.shoppingCart;
 
 export const sShoppingCart = createSelector(
     selectShoppingCart,
-    (state: iShoppingCartState) =>  {
+    (state: iShoppingCartState) => {
         return new ShoppingCart(state.entities);
     }
 );

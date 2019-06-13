@@ -1,7 +1,7 @@
 import { DataTableResource } from 'angular7-data-table';
 import { Component, OnInit } from '@angular/core';
-import { OrderPayload } from '@/_models/http-request-payload';
-import { OrderService } from '@/_services';
+import { Order } from '@/_models';
+import { OrderService, AuthenticationService } from '@/_services';
 
 @Component({
   selector: 'app-orders-list',
@@ -9,25 +9,30 @@ import { OrderService } from '@/_services';
   styleUrls: ['./orders-list.component.scss']
 })
 export class OrdersListComponent implements OnInit {
-  orders: OrderPayload[] = [];
-  tableResource: DataTableResource<OrderPayload>;
-  items: OrderPayload[] = [];
+  orders: Order[] = [];
+  tableResource: DataTableResource<Order>;
+  items: Order[] = [];
   itemCount: number;
+  isAdmin: boolean;
 
-  constructor(private orderService: OrderService) {
+  constructor(
+    private orderService: OrderService,
+    private authService: AuthenticationService,
+  ) {
 
   }
 
   ngOnInit() {
     this.orderService.getAll()
       .subscribe(orders => {
-        console.log(orders);
         this.orders = orders;
         this.initializeTable(orders);
       });
+
+    this.isAdmin = this.authService.currentUserValue.isAdmin;
   }
 
-  private initializeTable(orders: OrderPayload[]) {
+  private initializeTable(orders: Order[]) {
     this.tableResource = new DataTableResource(orders);
     this.tableResource.query({ offset: 0 })
       .then(items => this.items = items);

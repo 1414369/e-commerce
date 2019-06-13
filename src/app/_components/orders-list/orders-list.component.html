@@ -1,16 +1,26 @@
 <data-table [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)">
-  <data-table-column [property]="'title'" [header]="'Date'" [sortable]="true" [resizable]="true">
+
+  <data-table-column [property]="'user'" [header]="'User Name'" [sortable]="true" [resizable]="true" *ngIf="isAdmin">
+    <ng-template #dataTableCell let-item="item">
+      {{ item.user.name }}
+    </ng-template>
+  </data-table-column>
+
+  <data-table-column [property]="'createdDate'" [header]="'Date'" [sortable]="true" [resizable]="true">
+    <ng-template #dataTableCell let-item="item">
+      {{ item.createdDate | date:'medium' }}
+    </ng-template>
   </data-table-column>
 
   <data-table-column [property]="'price'" [header]="'Total Price'" [sortable]="true" [resizable]="true">
     <ng-template #dataTableCell let-item="item">
-      {{ item.price | currency:'USD':'symbol' }}
+      {{ item.totalPrice | currency:'USD':'symbol' }}
     </ng-template>
   </data-table-column>
 
   <data-table-column [property]="'$key'">
     <ng-template #dataTableCell let-item="item">
-      <a [routerLink]="['/admin/products/', item._id]">Edit</a>
+      <a [routerLink]="['/my/orders/', item._id]">View</a>
     </ng-template>
   </data-table-column>
 </data-table>

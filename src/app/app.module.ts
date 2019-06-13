@@ -36,9 +36,11 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './store/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { ShoppingCartEffects } from './store/effects';
-import { ShoppingCartSummaryComponent } from './client/check-out/shopping-cart-summary/shopping-cart-summary.component';
-import { ShippingFormComponent } from './client/check-out/shipping-form/shipping-form.component';
+import { ShoppingCartSummaryComponent } from './_components/shopping-cart-summary/shopping-cart-summary.component';
+import { ShippingFormComponent } from './_components/shipping-form/shipping-form.component';
 import { OrdersListComponent } from './_components/orders-list/orders-list.component';
+import { OrderDetailComponent } from './_components/order-detail/order-detail.component';
+import { TokenInterceptor } from './_helper/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,7 @@ import { OrdersListComponent } from './_components/orders-list/orders-list.compo
     ShoppingCartSummaryComponent,
     ShippingFormComponent,
     OrdersListComponent,
+    OrderDetailComponent,
   ],
   imports: [
     DataTableModule.forRoot(),
@@ -84,7 +87,8 @@ import { OrdersListComponent } from './_components/orders-list/orders-list.compo
   providers: [
     UserService,
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
-    { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true },
   ],
   entryComponents: [
     PickImageComponent,

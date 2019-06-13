@@ -1,3 +1,4 @@
+import { Order } from '@/_models';
 import { OrderHttp } from '@/_models/http-models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -7,7 +8,7 @@ import { OrderPayload } from '@/_models/http-request-payload';
 import { Store } from '@ngrx/store';
 import { iAppState } from '@/store/state';
 import { ClearCart } from '@/store/actions/shopping-cart.action';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -30,10 +31,21 @@ export class OrderService {
   }
 
   getAll() {
-    return this.http.get<OrderHttp[]>(`${environment.apiUrl}/orders`);
+    return this.http.get<OrderHttp[]>(`${environment.apiUrl}/orders`).pipe(
+      map((orders) => {
+        return orders.map(o => {
+          return new Order(o);
+        })
+      })
+    );
   }
+
   get(id) {
-    return this.http.get<OrderHttp>(`${environment.apiUrl}/orders/${id}`);
+    return this.http.get<OrderHttp>(`${environment.apiUrl}/orders/${id}`).pipe(
+      map((order) => {
+        return new Order(order);
+      })
+    );
   }
 
   delete(id) {

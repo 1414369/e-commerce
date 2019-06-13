@@ -52,6 +52,11 @@ export class AuthenticationService {
     this.router.navigate(['/sign-in']);
   }
 
+  getToken() {
+    const token = JSON.parse(localStorage.getItem(environment.tokenKey));
+    return token;
+  }
+
   private decodeToken(): User {
     const token = localStorage.getItem(environment.tokenKey);
     if (token) {

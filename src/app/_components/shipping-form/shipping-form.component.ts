@@ -5,6 +5,7 @@ import { OrderService, AuthenticationService } from '@/_services';
 import { Router } from '@angular/router';
 import { shippingHttp } from '@/_models/http-models';
 import { Subscription } from 'rxjs';
+import { Order } from '@/_models';
 
 @Component({
   selector: 'app-shipping-form',
@@ -13,6 +14,7 @@ import { Subscription } from 'rxjs';
 })
 export class ShippingFormComponent implements OnInit {
   @Input('shopping-cart') shoppingCart;
+  @Input('order') order: Order;
   shipping = {} as shippingHttp;
   userSubscription: Subscription;
   userId;
@@ -27,9 +29,15 @@ export class ShippingFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userSubscription = this.authenticationService.currentUser.subscribe(user => {
-      this.userId = user._id;
-    })
+    if (this.shoppingCart) {
+      this.userSubscription = this.authenticationService.currentUser.subscribe(user => {
+        this.userId = user._id;
+      })
+    }
+
+    if (this.order) {
+      this.shipping = this.order.shipping;
+    }
   }
 
   ngOnDestroy() {

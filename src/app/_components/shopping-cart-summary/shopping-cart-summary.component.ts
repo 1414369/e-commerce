@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ShoppingCartSummaryComponent implements OnInit {
   @Input('shopping-cart') cart: ShoppingCart
-  
+
   constructor() { }
 
   ngOnInit() {

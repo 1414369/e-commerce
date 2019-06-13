@@ -1,0 +1,11 @@
+<div class="row">
+  <aside class="col-6">
+    <app-shipping-form [order]='cart'></app-shipping-form>
+  </aside>
+
+  <aside class="col-6">
+    <app-shopping-cart-summary [shopping-cart]='cart'></app-shopping-cart-summary>
+  </aside>
+</div>
+
+<button type="button" class="btn btn-danger" (click)='delete' *ngIf='order'> Delete </button>
