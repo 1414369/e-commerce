@@ -1,0 +1,51 @@
+<form name="form" (ngSubmit)="f.form.valid && placeOrder()" #f="ngForm" novalidate>
+  <div class="form-group">
+    <label>Name</label>
+    <input name="name" [(ngModel)]="shipping.name" #name="ngModel" class="form-control" placeholder="Your Name"
+      type="text" [ngClass]="{ 'is-invalid': (name.touched || f.submitted) && name.invalid }" required minlength="3"
+      maxlength="1000">
+    <div *ngIf="(name.touched || f.submitted) && name.invalid" class="invalid-feedback">
+      <div *ngIf="name.errors.required">Name is required</div>
+      <div *ngIf="name.errors.minlength">Name must be at least 3 characters</div>
+      <div *ngIf="name.errors.maxlength">Name must be max 1000 characters long</div>
+    </div>
+  </div> <!-- form-group// -->
+
+
+  <div class="form-group">
+    <label>Address</label>
+    <input name="address" [(ngModel)]="shipping.address" #address="ngModel" class="form-control" placeholder="Line 1"
+      type="text" [ngClass]="{ 'is-invalid': (address.touched || f.submitted) && address.invalid }" required
+      minlength="3" maxlength="1000">
+    <div *ngIf="(address.touched || f.submitted) && address.invalid" class="invalid-feedback">
+      <div *ngIf="address.errors.required">Address is required</div>
+      <div *ngIf="address.errors.minlength">Address must be at least 3 characters</div>
+      <div *ngIf="address.errors.maxlength">Address must be max 1000 characters long</div>
+    </div>
+  </div> <!-- form-group// -->
+
+  <div class="form-group">
+    <input name="address2" [(ngModel)]="shipping.address2" #address2="ngModel" class="form-control" placeholder="Line 2"
+      type="text" [ngClass]="{ 'is-invalid': address2.value && (address2.touched || f.submitted) && address2.invalid }"
+      minlength="3" maxlength="1000">
+    <div *ngIf="(address2.touched || f.submitted) && address2.invalid" class="invalid-feedback">
+      <div *ngIf="address2.errors.minlength">Address must be at least 3 characters</div>
+      <div *ngIf="address2.errors.maxlength">Address must be max 1000 characters long</div>
+    </div>
+  </div> <!-- form-group// -->
+
+  <div class="form-group">
+    <label>City</label>
+    <input name="city" [(ngModel)]="shipping.city" #city="ngModel" class="form-control" placeholder="Your City"
+      type="text" [ngClass]="{ 'is-invalid': (city.touched || f.submitted) && city.invalid }" required minlength="3"
+      maxlength="1000">
+    <div *ngIf="(city.touched || f.submitted) && city.invalid" class="invalid-feedback">
+      <div *ngIf="city.errors.required">City is required</div>
+      <div *ngIf="city.errors.minlength">City must be at least 3 characters</div>
+      <div *ngIf="city.errors.maxlength">City must be max 1000 characters long</div>
+    </div>
+  </div> <!-- form-group// -->
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary"> Place Order </button>
+  </div> <!-- form-group// -->
+</form>

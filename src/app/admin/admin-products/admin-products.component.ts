@@ -1,7 +1,6 @@
 import { DataTableResource } from 'angular7-data-table';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Product } from '@/_models';
-import { Subscription } from 'rxjs';
 import { ProductService } from '@/_services';
 
 @Component({
@@ -9,7 +8,7 @@ import { ProductService } from '@/_services';
   templateUrl: './admin-products.component.html',
   styleUrls: ['./admin-products.component.scss']
 })
-export class AdminProductsComponent implements OnInit {
+export class AdminProductsComponent {
   products: Product[];
   tableResource: DataTableResource<Product>;
   items: Product[] = [];
@@ -45,9 +44,4 @@ export class AdminProductsComponent implements OnInit {
 
     this.initializeTable(filteredProducts);
   }
-
-  ngOnInit() {
-  }
-
-
 }

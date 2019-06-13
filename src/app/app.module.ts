@@ -13,7 +13,6 @@ import { NavbarComponent } from './client/navbar/navbar.component';
 import { HomeComponent } from './client/home/home.component';
 import { ShoppingCartComponent } from './client/shopping-cart/shopping-cart.component';
 import { CheckOutComponent } from './client/check-out/check-out.component';
-import { OrderSuccessComponent } from './client/order-success/order-success.component';
 import { MyOrdersComponent } from './client/my-orders/my-orders.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { SignInComponent } from './client/sign-in/sign-in.component';
@@ -37,6 +36,9 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './store/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { ShoppingCartEffects } from './store/effects';
+import { ShoppingCartSummaryComponent } from './client/check-out/shopping-cart-summary/shopping-cart-summary.component';
+import { ShippingFormComponent } from './client/check-out/shipping-form/shipping-form.component';
+import { OrdersListComponent } from './_components/orders-list/orders-list.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,6 @@ import { ShoppingCartEffects } from './store/effects';
     ProductsComponent,
     ShoppingCartComponent,
     CheckOutComponent,
-    OrderSuccessComponent,
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
@@ -60,6 +61,9 @@ import { ShoppingCartEffects } from './store/effects';
     ProductFilterComponent,
     ProductCardComponent,
     ProductQuantityComponent,
+    ShoppingCartSummaryComponent,
+    ShippingFormComponent,
+    OrdersListComponent,
   ],
   imports: [
     DataTableModule.forRoot(),

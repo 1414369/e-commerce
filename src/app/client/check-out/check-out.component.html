@@ -1,3 +1,9 @@
-<p>
-  check-out works!
-</p>
+<div class="row" *ngIf="shoppingCart$ | async as cart">
+  <aside class="col-6">
+    <app-shipping-form [shopping-cart]='cart'></app-shipping-form>
+  </aside>
+
+  <aside class="col-6">
+    <app-shopping-cart-summary [shopping-cart]='cart'></app-shopping-cart-summary>
+  </aside>
+</div>

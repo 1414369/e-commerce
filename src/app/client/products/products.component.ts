@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { sShoppingCart } from '@/store/selectors/shopping-cart.selector';
 import { iAppState } from '@/store/state';
+import { GetShoppingCart } from '@/store/actions/shopping-cart.action';
 
 @Component({
   selector: 'app-products',
@@ -28,6 +29,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.store.dispatch(new GetShoppingCart());
     this.populateProducts();
   }
 

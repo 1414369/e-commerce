@@ -1,7 +1,7 @@
 import { first } from 'rxjs/operators';
 import { AuthenticationService, Credentials } from '@/_services';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -18,7 +18,8 @@ export class SignInComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
     private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
@@ -30,7 +31,9 @@ export class SignInComponent implements OnInit {
       .subscribe(
         data => {
           this.toastr.success('Sign in successful');
-          this.router.navigate(['']);
+
+          let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+          this.router.navigate([returnUrl]);
         });
   }
 }
