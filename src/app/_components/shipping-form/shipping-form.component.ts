@@ -5,7 +5,6 @@ import { OrderService, AuthenticationService } from '@/_services';
 import { Router } from '@angular/router';
 import { shippingHttp } from '@/_models/http-models';
 import { Subscription } from 'rxjs';
-import { Order } from '@/_models';
 
 @Component({
   selector: 'app-shipping-form',
@@ -14,8 +13,9 @@ import { Order } from '@/_models';
 })
 export class ShippingFormComponent implements OnInit {
   @Input('shopping-cart') shoppingCart;
-  @Input('order') order: Order;
-  shipping = {} as shippingHttp;
+  @Input('shipping') shipping = {} as shippingHttp;
+  @Input('delete-action') deleteAction: boolean = false;
+
   userSubscription: Subscription;
   userId;
 
@@ -35,13 +35,12 @@ export class ShippingFormComponent implements OnInit {
       })
     }
 
-    if (this.order) {
-      this.shipping = this.order.shipping;
-    }
   }
 
   ngOnDestroy() {
-    this.userSubscription.unsubscribe();
+    if (this.shoppingCart) {
+      this.userSubscription.unsubscribe();
+    }
   }
 
   placeOrder() {
@@ -51,5 +50,4 @@ export class ShippingFormComponent implements OnInit {
       this.router.navigate(['/']);
     });
   }
-
 }

@@ -3,7 +3,7 @@
     <label>Name</label>
     <input name="name" [(ngModel)]="shipping.name" #name="ngModel" class="form-control" placeholder="Your Name"
       type="text" [ngClass]="{ 'is-invalid': (name.touched || f.submitted) && name.invalid }" required minlength="3"
-      maxlength="1000">
+      maxlength="1000" [disabled]='deleteAction'>
     <div *ngIf="(name.touched || f.submitted) && name.invalid" class="invalid-feedback">
       <div *ngIf="name.errors.required">Name is required</div>
       <div *ngIf="name.errors.minlength">Name must be at least 3 characters</div>
@@ -16,7 +16,7 @@
     <label>Address</label>
     <input name="address" [(ngModel)]="shipping.address" #address="ngModel" class="form-control" placeholder="Line 1"
       type="text" [ngClass]="{ 'is-invalid': (address.touched || f.submitted) && address.invalid }" required
-      minlength="3" maxlength="1000">
+      minlength="3" maxlength="1000" [disabled]='deleteAction'>
     <div *ngIf="(address.touched || f.submitted) && address.invalid" class="invalid-feedback">
       <div *ngIf="address.errors.required">Address is required</div>
       <div *ngIf="address.errors.minlength">Address must be at least 3 characters</div>
@@ -27,7 +27,7 @@
   <div class="form-group">
     <input name="address2" [(ngModel)]="shipping.address2" #address2="ngModel" class="form-control" placeholder="Line 2"
       type="text" [ngClass]="{ 'is-invalid': address2.value && (address2.touched || f.submitted) && address2.invalid }"
-      minlength="3" maxlength="1000">
+      minlength="3" maxlength="1000" [disabled]='deleteAction'>
     <div *ngIf="(address2.touched || f.submitted) && address2.invalid" class="invalid-feedback">
       <div *ngIf="address2.errors.minlength">Address must be at least 3 characters</div>
       <div *ngIf="address2.errors.maxlength">Address must be max 1000 characters long</div>
@@ -38,7 +38,7 @@
     <label>City</label>
     <input name="city" [(ngModel)]="shipping.city" #city="ngModel" class="form-control" placeholder="Your City"
       type="text" [ngClass]="{ 'is-invalid': (city.touched || f.submitted) && city.invalid }" required minlength="3"
-      maxlength="1000">
+      maxlength="1000" [disabled]='deleteAction'>
     <div *ngIf="(city.touched || f.submitted) && city.invalid" class="invalid-feedback">
       <div *ngIf="city.errors.required">City is required</div>
       <div *ngIf="city.errors.minlength">City must be at least 3 characters</div>
@@ -46,6 +46,7 @@
     </div>
   </div> <!-- form-group// -->
   <div class="form-group">
-    <button type="submit" class="btn btn-primary" *ngIf='!order'> Place Order </button>
+    <button type="submit" class="btn btn-primary" *ngIf='!deleteAction'> Place Order </button>
+    <button type="button" class="btn btn-danger" (click)='delete' *ngIf='deleteAction'> Delete </button>
   </div> <!-- form-group// -->
 </form>

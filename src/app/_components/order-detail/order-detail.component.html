@@ -1,11 +1,9 @@
-<div class="row">
+<div class="row" *ngIf='order$ | async as order'>
   <aside class="col-6">
-    <app-shipping-form [order]='cart'></app-shipping-form>
+    <app-shipping-form [shipping]='order.shipping' [delete-action]='true'></app-shipping-form>
   </aside>
 
   <aside class="col-6">
-    <app-shopping-cart-summary [shopping-cart]='cart'></app-shopping-cart-summary>
+    <app-shopping-cart-summary [model]='order'></app-shopping-cart-summary>
   </aside>
 </div>
-
-<button type="button" class="btn btn-danger" (click)='delete' *ngIf='order'> Delete </button>

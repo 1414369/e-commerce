@@ -9,12 +9,12 @@ export class Order {
     createdDate: Date;
     shipping: shippingHttp;
 
-    constructor(private order: OrderHttp, ) {
+    constructor(private order: OrderHttp) {
         for (let item of this.order.items) {
             this.items.push(new ShoppingCartItem(item.product, item.quantity));
         }
 
-        this._id = this.order._id;  
+        this._id = this.order._id;
         this.user = this.order.user;
         this.createdDate = this.order.createdDate;
         this.shipping = this.order.shipping;

@@ -1,5 +1,8 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '@/_services';
+import { Order } from '@/_models';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-order-detail',
@@ -8,16 +11,18 @@ import { OrderService } from '@/_services';
 })
 export class OrderDetailComponent implements OnInit {
   userId: string;
+  id: string;
+  order$: Observable<Order>;
 
   constructor(
     private orderService: OrderService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
-    this.orderService.getAllByUser()
-      .subscribe(order => {
-        console.log(order);
-      });
+    this.id = this.route.snapshot.paramMap.get('id');
+
+    this.order$ = this.orderService.get(this.id)
   }
 
 }
