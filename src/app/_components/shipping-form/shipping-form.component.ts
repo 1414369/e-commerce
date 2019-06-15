@@ -1,8 +1,9 @@
+import { User } from '@/_models';
 import { OrderPayload } from '@/_models/http-request-payload';
 import { Component, OnInit, Input } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { OrderService, AuthenticationService } from '@/_services';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { shippingHttp } from '@/_models/http-models';
 import { Subscription } from 'rxjs';
 
@@ -16,35 +17,38 @@ export class ShippingFormComponent implements OnInit {
   @Input('shipping') shipping = {} as shippingHttp;
   @Input('delete-action') deleteAction: boolean = false;
 
+  orderId: string;
   userSubscription: Subscription;
-  userId;
+  user: User;
 
   constructor(
     private orderService: OrderService,
     private authenticationService: AuthenticationService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
 
   }
 
   ngOnInit() {
-    if (this.shoppingCart) {
-      this.userSubscription = this.authenticationService.currentUser.subscribe(user => {
-        this.userId = user._id;
-      })
-    }
-
+    this.orderId = this.route.snapshot.paramMap.get('id');
+    this.user = this.authenticationService.currentUserValue;
   }
 
-  ngOnDestroy() {
-    if (this.shoppingCart) {
-      this.userSubscription.unsubscribe();
-    }
+  deleteOrder() {
+    this.orderService.delete(this.orderId).subscribe(result => {
+      this.toastr.success('Delete order successfully.')
+      if (this.user.isAdmin) {
+        this.router.navigate(['/admin/orders']);
+      } else {
+        this.router.navigate(['/my/orders']);
+      }
+    });
   }
 
   placeOrder() {
-    let order = new OrderPayload(this.userId, this.shoppingCart.items, this.shipping);
+    let order = new OrderPayload(this.user._id, this.shoppingCart.items, this.shipping);
     this.orderService.create(order).subscribe(result => {
       this.toastr.success('Place order successfully.')
       this.router.navigate(['/']);

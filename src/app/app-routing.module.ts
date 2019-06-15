@@ -26,6 +26,7 @@ const routes: Routes = [
   { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'admin/products/:id', component: ProductFormComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard, AdminGuard] },
+  { path: 'admin/orders/:id', component: OrderDetailComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'no-permission', component: NoPermissionComponent },
   { path: '**', redirectTo: '/' },

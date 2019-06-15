@@ -27,7 +27,7 @@
           {{ currentUser.name }}
         </a>
         <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a ngbDropdownItem class="dropdown-item" routerLink='/my/orders'>My orders</a>
+          <a ngbDropdownItem class="dropdown-item" routerLink='/my/orders' *ngIf="!currentUser.isAdmin">My orders</a>
           <a ngbDropdownItem class="dropdown-item" routerLink='/admin/orders' *ngIf="currentUser.isAdmin">Manage
             Orders</a>
           <a ngbDropdownItem class="dropdown-item" routerLink='/admin/products' *ngIf="currentUser.isAdmin">Manage

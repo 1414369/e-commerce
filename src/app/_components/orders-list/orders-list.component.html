@@ -20,7 +20,7 @@
 
   <data-table-column [property]="'$key'">
     <ng-template #dataTableCell let-item="item">
-      <a [routerLink]="['/my/orders/', item._id]">View</a>
+      <a [routerLink]='getRouterLink(item)'>View</a>
     </ng-template>
   </data-table-column>
 </data-table>

@@ -2,6 +2,7 @@ import { DataTableResource } from 'angular7-data-table';
 import { Component, OnInit } from '@angular/core';
 import { Order } from '@/_models';
 import { OrderService, AuthenticationService } from '@/_services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-orders-list',
@@ -18,6 +19,7 @@ export class OrdersListComponent implements OnInit {
   constructor(
     private orderService: OrderService,
     private authService: AuthenticationService,
+    private router: Router,
   ) {
 
   }
@@ -30,6 +32,14 @@ export class OrdersListComponent implements OnInit {
       });
 
     this.isAdmin = this.authService.currentUserValue.isAdmin;
+  }
+
+  getRouterLink(item) {
+    if (this.isAdmin) {
+      return ['/admin/orders/', item._id];
+    } else {
+      return ['/my/orders/', item._id];
+    }
   }
 
   private initializeTable(orders: Order[]) {

@@ -47,6 +47,7 @@
   </div> <!-- form-group// -->
   <div class="form-group">
     <button type="submit" class="btn btn-primary" *ngIf='!deleteAction'> Place Order </button>
-    <button type="button" class="btn btn-danger" (click)='delete' *ngIf='deleteAction'> Delete </button>
+    <button type="button" class="btn btn-danger" (click)='deleteOrder()' *ngIf='deleteAction && !this.user.isAdmin'>
+      Delete </button>
   </div> <!-- form-group// -->
 </form>
