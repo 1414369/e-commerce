@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { WebsocketService } from './websocket.service';
 
 
 @Injectable({
@@ -20,7 +21,7 @@ export class AuthenticationService {
   constructor(
     private toastr: ToastrService,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
   ) {
     this.currentUserSubject = new BehaviorSubject<User>(this.decodeToken());
     this.currentUser = this.currentUserSubject.asObservable();
@@ -38,6 +39,7 @@ export class AuthenticationService {
             localStorage.setItem(environment.tokenKey, JSON.stringify(data['token']))
             this.currentUserSubject.next(this.decodeToken());
           }
+
           return this.decodeToken();
         })
       )

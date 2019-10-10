@@ -1,4 +1,5 @@
-import { UserService } from '@/_services';
+import { UserService, WebsocketService, ChatService } from '@/_services';
+
 import { MustMatchDirective, GlobalErrorHandler, ServerErrorInterceptor } from '@/_helper';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
@@ -41,6 +42,7 @@ import { ShippingFormComponent } from './_components/shipping-form/shipping-form
 import { OrdersListComponent } from './_components/orders-list/orders-list.component';
 import { OrderDetailComponent } from './_components/order-detail/order-detail.component';
 import { TokenInterceptor } from './_helper/token.interceptor';
+import { ChatTabComponent } from './_components/chat-tab/chat-tab.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +69,7 @@ import { TokenInterceptor } from './_helper/token.interceptor';
     ShippingFormComponent,
     OrdersListComponent,
     OrderDetailComponent,
+    ChatTabComponent,
   ],
   imports: [
     DataTableModule.forRoot(),
@@ -86,6 +89,8 @@ import { TokenInterceptor } from './_helper/token.interceptor';
   ],
   providers: [
     UserService,
+    WebsocketService,
+    ChatService,
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true },

@@ -13,11 +13,13 @@ import { NoPermissionComponent } from './client/no-permission/no-permission.comp
 import { AuthGuard, AdminGuard, LoggedInGuard } from '@/_guards';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { OrderDetailComponent } from './_components/order-detail/order-detail.component';
+import { ChatTabComponent } from './_components/index';
 
 const routes: Routes = [
   { path: '', component: ProductsComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'shopping-cart', component: ShoppingCartComponent },
+  { path: 'messages', component: ChatTabComponent, canActivate: [AuthGuard] },
   { path: 'my/orders/:id', component: OrderDetailComponent, canActivate: [AuthGuard] },
   { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
   { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard] },
