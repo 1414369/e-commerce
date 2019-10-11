@@ -1,0 +1,47 @@
+<div class="inbox_people">
+  <div class="headind_srch">
+    <div class="recent_heading">
+      <h4>Recent</h4>
+    </div>
+    <div class="srch_bar">
+      <div class="stylish-input-group">
+        <input type="text" class="search-bar" placeholder="Find more friends" #friendSearch>
+        <span class="input-group-addon">
+          <button type="button" (click)="findFriend(friendSearch.value)" [hidden]="onSearch"> <i class="fa fa-search"
+              aria-hidden="true"></i> </button>
+          <button type="button" [hidden]="!onSearch" (click)="sreachCancel()"> <i class="far fa-times-circle"
+              aria-hidden="true"></i> </button>
+        </span> </div>
+    </div>
+  </div>
+  <div class="inbox_chat">
+    <div class="chat_list" [class.active_chat]='selectedFriend === friend.userInfo._id' routerLink="/messages"
+      [queryParams]='{selected: friend.userInfo._id}' *ngFor="let friend of friendList$ | async" [hidden]="onSearch">
+      <div class="chat_people">
+        <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+        <div class="chat_ib">
+          <h5>{{ friend.userInfo.name }} <span class="chat_date">{{friend.lastDateMessage | date : 'shortTime' }} |
+              {{ friend.lastDateMessage | date : 'mediumDate'}}</span>
+          </h5>
+          <p><span class="remove_btn" (click)="removeFriend(friend.userInfo._id)">Unfriend</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat_list" [hidden]="!onSearch" *ngIf="friendResult$ | async as friendResult">
+      <div class="chat_people" *ngIf="friendResult.name">
+        <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+        <div class="chat_ib">
+          <h5>{{ friendResult.name }}</h5>
+          <p><span class="add_btn" (click)="addFriend(friendResult._id)">Add to friend list</span></p>
+        </div>
+      </div>
+
+      <div class="chat_people" *ngIf="!friendResult.name">
+        <div class="chat_ib">
+          <h5>User is not exist!</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

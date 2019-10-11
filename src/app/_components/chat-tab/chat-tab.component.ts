@@ -1,6 +1,8 @@
+import { ChatService, NEW_MESSAGE } from '@/_services/chat.service';
 import { WebsocketService, iSocketEvent, iChatMessages } from '@/_services';
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-chat-tab',
@@ -10,43 +12,49 @@ import { Subscription } from 'rxjs';
 export class ChatTabComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   messages = {};
-  selectedPerson: string = "5d0224dd2ba6282ca0586442";
+  selectedFriend: string = "5cddea1c6998c4308ce20c47";
   id: string;
 
   @ViewChild("messageBox") el: ElementRef
 
   constructor(
-    private webSocket: WebsocketService,
+    // private webSocket: WebsocketService,
+    private chatService: ChatService,
+    private route: ActivatedRoute,
 
   ) {
   }
 
   ngOnInit() {
-    this.subscription = this.webSocket.subject.subscribe(
-      (socketEvent: iSocketEvent<iChatMessages>) => {
-        let event = socketEvent.event;
-        let data = socketEvent.data;
-        console.log(data);
-        if (event === "new_message") {
-          this.messages[data.id + this.id] = this.messages[data.id + this.id] || [];
-          this.messages[data.id + this.id].push(data);
-        }
-      },
-      err => console.log(err),
-      () => console.log('complete')
+    this.route.queryParamMap.subscribe(param => {
+      this.selectedFriend = param.get('selected')
+    })
+
+    this.subscription = this.chatService.subjects[NEW_MESSAGE].subscribe(
+      (wsData) => {
+        console.log(wsData);
+      }
     );
   }
 
   sendMessage(message: string) {
-    message = message.trim();
-    if (message != "") {
-      this.webSocket.send('new_message', { receiver: '5d0224dd2ba6282ca0586442', message: message });
-      this.el.nativeElement.value = "";
-    }
+    this.chatService.send(message, this.selectedFriend);
+    this.el.nativeElement.value = "";
   }
 
-  setID(id: string) {
-    this.id = id;
+  findFriend(id: string) {
+    this.chatService.findFriend(id);
+  }
+  addFriend(id: string) {
+    this.chatService.addFriend(id);
+  }
+
+  removeFriend(id: string) {
+    this.chatService.removeFriend(id);
+  }
+
+  getAllFriends() {
+    this.chatService.getAllFriends();
   }
 
   ngOnDestroy() {

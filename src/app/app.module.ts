@@ -43,6 +43,7 @@ import { OrdersListComponent } from './_components/orders-list/orders-list.compo
 import { OrderDetailComponent } from './_components/order-detail/order-detail.component';
 import { TokenInterceptor } from './_helper/token.interceptor';
 import { ChatTabComponent } from './_components/chat-tab/chat-tab.component';
+import { FriendListComponent } from './_components/chat-tab/friend-list/friend-list.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { ChatTabComponent } from './_components/chat-tab/chat-tab.component';
     OrdersListComponent,
     OrderDetailComponent,
     ChatTabComponent,
+    FriendListComponent,
   ],
   imports: [
     DataTableModule.forRoot(),
