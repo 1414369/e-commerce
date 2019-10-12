@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000/api',
+  apiUrl: 'http://storj-dota2divine.ddns.net:3000/api',
   tokenKey: 'token',
-  websocketUrl: 'ws://localhost:3000',
+  websocketUrl: 'ws://storj-dota2divine.ddns.net:3000',
 };
 
 /*
