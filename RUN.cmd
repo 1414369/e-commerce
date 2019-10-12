@@ -1,0 +1,1 @@
+ng serve --host 192.168.1.3 --port 80 --public-host storj-dota2divine.ddns.net
