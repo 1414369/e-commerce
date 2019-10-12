@@ -4,9 +4,9 @@
       <app-friend-list [selected-friend]='selectedFriend'></app-friend-list>
 
       <div class="mesgs">
-        <div class="msg_history">
-          <div *ngFor="let message of messages[selectedPerson + myId]">
-            <div class="incoming_msg" *ngIf="message.receiver == selectedPerson">
+        <div class="msg_history" #scrollMe>
+          <div *ngFor="let message of messages[selectedFriend]">
+            <div class="incoming_msg" *ngIf="message.id == selectedFriend">
               <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
               </div>
               <div class="received_msg">
@@ -17,7 +17,7 @@
                 </div>
               </div>
             </div>
-            <div class="outgoing_msg" *ngIf="message.id == myId">
+            <div class="outgoing_msg" *ngIf="message.id == myID">
               <div class="sent_msg">
                 <p>{{ message.message }}</p>
                 <span class="time_date"> {{message.time_date | date : 'shortTime' }} |

@@ -1,6 +1,6 @@
 import { ChatService, NEW_MESSAGE } from '@/_services/chat.service';
-import { WebsocketService, iSocketEvent, iChatMessages } from '@/_services';
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { AuthenticationService } from '@/_services';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
@@ -9,32 +9,48 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './chat-tab.component.html',
   styleUrls: ['./chat-tab.component.scss']
 })
-export class ChatTabComponent implements OnInit, OnDestroy {
+export class ChatTabComponent implements OnInit, OnDestroy, AfterViewChecked {
   subscription: Subscription;
+  subscription1: Subscription;
   messages = {};
   selectedFriend: string = "5cddea1c6998c4308ce20c47";
   id: string;
+  myID: string;
 
   @ViewChild("messageBox") el: ElementRef
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
   constructor(
-    // private webSocket: WebsocketService,
     private chatService: ChatService,
     private route: ActivatedRoute,
-
+    private authService: AuthenticationService,
   ) {
   }
 
   ngOnInit() {
-    this.route.queryParamMap.subscribe(param => {
+    this.myID = this.authService.currentUserValue._id;
+
+    this.subscription1 = this.route.queryParamMap.subscribe(param => {
       this.selectedFriend = param.get('selected')
     })
 
     this.subscription = this.chatService.subjects[NEW_MESSAGE].subscribe(
       (wsData) => {
-        console.log(wsData);
+        this.messages[this.selectedFriend] = this.messages[this.selectedFriend] || []; this.messages[this.selectedFriend].push(wsData);
       }
     );
+
+    this.scrollToBottom();
+  }
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+    try {
+      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch (err) { }
   }
 
   sendMessage(message: string) {
@@ -58,7 +74,7 @@ export class ChatTabComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // this.webSocket.send('close_connection', {});
     this.subscription.unsubscribe();
+    this.subscription1.unsubscribe();
   }
 }
